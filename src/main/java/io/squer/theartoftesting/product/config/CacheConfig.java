@@ -1,4 +1,4 @@
-package io.squer.theartoftesting.config;
+package io.squer.theartoftesting.product.config;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.cache.CacheManager;

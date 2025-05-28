@@ -1,4 +1,4 @@
-package io.squer.theartoftesting.config;
+package io.squer.theartoftesting.product.config;
 
 import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.api.trace.Tracer;
