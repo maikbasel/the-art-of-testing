@@ -1,4 +1,4 @@
-package io.squer.theartoftesting;
+package io.squer.theartoftesting.core;
 
 import io.opentelemetry.api.trace.StatusCode;
 import io.opentelemetry.api.trace.Tracer;
@@ -6,8 +6,6 @@ import io.opentelemetry.context.Scope;
 import io.vavr.control.Either;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class ProductService {

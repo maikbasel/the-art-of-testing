@@ -1,4 +1,4 @@
-package io.squer.theartoftesting;
+package io.squer.theartoftesting.core;
 
 import java.util.Objects;
 

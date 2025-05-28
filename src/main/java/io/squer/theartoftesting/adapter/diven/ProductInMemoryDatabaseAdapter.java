@@ -1,5 +1,7 @@
-package io.squer.theartoftesting;
+package io.squer.theartoftesting.adapter.diven;
 
+import io.squer.theartoftesting.core.Product;
+import io.squer.theartoftesting.core.ProductRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
