@@ -18,9 +18,6 @@ class ProductContractTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private InMemorySpanExporter exporter;
-
     @Test
     void shouldRespondWithProductForKnownProductId() throws Exception {
         mockMvc.perform(get("/products/{id}", "1"))

@@ -2,7 +2,6 @@ package io.squer.theartoftesting.good.product;
 
 import io.squer.theartoftesting.product.core.PricingContext;
 import io.squer.theartoftesting.product.core.Product;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
