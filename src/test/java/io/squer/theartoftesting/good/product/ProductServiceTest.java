@@ -20,7 +20,8 @@ import static org.assertj.core.api.Assertions.assertThat;
         ProductInMemoryDatabaseAdapter.class,
         CacheConfig.class,
         TracingConfig.class
-})public class ProductServiceTest {
+})
+class ProductServiceTest {
 
     @Autowired
     private ProductService productService;

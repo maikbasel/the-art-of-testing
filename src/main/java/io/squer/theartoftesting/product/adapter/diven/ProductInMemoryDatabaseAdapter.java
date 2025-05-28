@@ -14,8 +14,8 @@ public class ProductInMemoryDatabaseAdapter implements ProductRepository {
     private static final Map<String, Product> products = new ConcurrentHashMap<>();
 
     public ProductInMemoryDatabaseAdapter() {
-        products.put("1", new Product("1", "Foo"));
-        products.put("2", new Product("1", "Bar"));
+        products.put("1", new Product("1", "Foo", 30.0));
+        products.put("2", new Product("1", "Bar", 15.0));
     }
 
     @Override

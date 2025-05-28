@@ -6,10 +6,12 @@ public class Product {
 
     private final String id;
     private final String name;
+    private final double basePrice;
 
-    public Product(String id, String name) {
+    public Product(String id, String name, double basePrice) {
         this.id = id;
         this.name = name;
+        this.basePrice = basePrice;
     }
 
     public String getId() {
@@ -18,6 +20,22 @@ public class Product {
 
     public String getName() {
         return name;
+    }
+
+    public double calculatePrice(PricingContext context) {
+        var discount = context.premiumUser() && basePrice > 20 ? 0.20 : 0.0;
+
+        var discounted = basePrice * (1 - discount);
+
+        var taxRate = switch (context.countryCode()) {
+            case "DE" -> 0.19;
+            case "US" -> 0.15;
+            default -> 0.0;
+        };
+
+        var tax = discounted * taxRate;
+
+        return discounted + tax;
     }
 
     @Override
