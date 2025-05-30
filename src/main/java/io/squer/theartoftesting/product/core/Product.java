@@ -1,10 +1,11 @@
 package io.squer.theartoftesting.product.core;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public class Product {
 
-    private final String id;
+    private String id;
     private final String name;
     private final double basePrice;
 
@@ -14,12 +15,16 @@ public class Product {
         this.basePrice = basePrice;
     }
 
-    public String getId() {
-        return id;
+    public Optional<String> getId() {
+        return Optional.of(id);
     }
 
     public String getName() {
         return name;
+    }
+
+    public double getBasePrice() {
+        return basePrice;
     }
 
     public double calculatePrice(PricingContext context) {
@@ -36,6 +41,10 @@ public class Product {
         var tax = discounted * taxRate;
 
         return discounted + tax;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

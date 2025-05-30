@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
@@ -26,5 +27,17 @@ public class ProductInMemoryDatabaseAdapter implements ProductRepository {
         }
 
         return Optional.of(product);
+    }
+
+    @Override
+    public String saveProduct(Product product) {
+        var id = products.size() + 1;
+        var productId = String.valueOf(id);
+
+        product.setId(productId);
+
+        products.put(productId, product);
+
+        return productId;
     }
 }

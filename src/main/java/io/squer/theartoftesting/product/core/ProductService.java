@@ -22,7 +22,6 @@ public class ProductService {
         this.cache = cacheManager.getCache("products");
     }
 
-    @Cacheable("products")
     public Either<ProductError, Product> getProduct(String productId) {
         var span = tracer.spanBuilder("getProduct").startSpan();
 
@@ -64,6 +63,32 @@ public class ProductService {
             return Either.right(product);
         } finally {
             span.end();
+        }
+    }
+
+    public Either<ProductError, String> createProduct(Product product) {
+        var span = tracer.spanBuilder("createProduct").startSpan();
+
+        try (Scope scope = span.makeCurrent()) {
+            try {
+                var id = productRepository.saveProduct(product);
+
+                span.setAttribute("product.id", id);
+
+                span.addEvent("Product created");
+
+                span.addEvent("Cache product");
+
+                cache.put(id, product);
+
+                return Either.right(id);
+            } catch (Exception e) {
+                span.addEvent("Product creation failed");
+                span.setStatus(StatusCode.ERROR, "Product creation failed");
+
+                return Either.left(new ProductError("Product creation failed"));
+            }
+
         }
     }
 }

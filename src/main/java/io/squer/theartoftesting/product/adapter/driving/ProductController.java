@@ -4,10 +4,11 @@ import io.squer.theartoftesting.product.core.Product;
 import io.squer.theartoftesting.product.core.ProductService;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.net.URI;
 
 @RestController
 public class ProductController {
@@ -29,6 +30,23 @@ public class ProductController {
         }
 
         return result
-                .getOrElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .getOrElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, result.getLeft().message()));
+    }
+
+    @PostMapping("/products")
+    public ResponseEntity<Void> postProduct(@RequestBody Product product) {
+        var result = productService.createProduct(product);
+
+        if (result.isLeft()) {
+            var error = result.getLeft();
+            LOG.error(error.message());
+
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, error.message());
+        }
+
+        var productId = result.get();
+        var location = URI.create("/products/" + productId);
+
+        return ResponseEntity.created(location).build();
     }
 }
